@@ -51,3 +51,5 @@ const refetch = ()=>{
 
 return {data, isLoading, error, refetch};
 }
+
+export default useFetch;
