@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
     shadowColor: COLORS.white,
   }),
   logoContainer: (selectedJob, item) => ({
-    width: 50,
-    height: 50,
+    width: 200,
+    height: 150,
     backgroundColor: selectedJob === item.job_id ? "#FFF" : COLORS.white,
     borderRadius: SIZES.medium,
     justifyContent: "center",
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     height: "70%",
   },
   companyName: {
-    fontSize: SIZES.medium,
+    fontSize: SIZES.small,
     fontFamily: FONT.regular,
     color: "#B3AEC6",
     marginTop: SIZES.small / 1.5,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     marginTop: SIZES.large,
   },
   jobName: (selectedJob, item) => ({
-    fontSize: SIZES.large,
+    fontSize: SIZES.small,
     fontFamily: FONT.medium,
     color: selectedJob === item.job_id ? COLORS.white : COLORS.primary,
   }),
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium - 2,
     fontFamily: FONT.regular,
     color: "#B3AEC6",
+    textAlign:"center"
   },
 });
 

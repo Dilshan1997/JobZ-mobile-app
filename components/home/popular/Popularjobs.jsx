@@ -13,6 +13,7 @@ import { COLORS, SIZES } from "../../../constants";
 import PopularJobCard from "../../common/cards/popular/PopularJobCard";
 import useFetch from "../../../hook/useFetch";
 
+
 const Popularjobs = () => {
   const router = useRouter();
 
@@ -44,8 +45,7 @@ console.log(data)
           <Text>Something went wrong</Text>
         ) : (
           <FlatList
-            data={[1,2,3,4,5]}
-            // data={data}
+            data={data}
             renderItem={({ item }) => (
               <PopularJobCard
                 item={item}

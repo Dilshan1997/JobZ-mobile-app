@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { axios } from "axios";
+import  axios from "axios";
 
 // import { RAPID_API_KEY } from '@env';
 
@@ -26,12 +26,15 @@ const fetchData = async ()=>{
     setIsLoading(true);
 
     try {
+      // console.log(options)
         const response = await axios.request(options);
+        console.log("fd",response);
         setData(response.data.data);
         setIsLoading(false);
 
     } catch (error){
         setError(error);
+        console.log("error",error)
         alert('There is an error')
 
     }finally {
