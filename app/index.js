@@ -4,6 +4,7 @@ import { Stack, useRouter } from 'expo-router';
 import { COLORS, icons, images, SIZES } from '../constants'
 import { Popularjobs, ScreenHeaderBtn, Welcome, Nearbyjobs } from '../components'
 import * as LocalAuthentication from 'expo-local-authentication';
+import axios from 'axios';
 
 const Home = () => {
     const router = useRouter();
@@ -20,9 +21,36 @@ const Home = () => {
 
     useEffect(() => {
         if (isBiometricSupported)
+        console.log("test hook......................................")
             handleBiometricAuthentication()
 
-    })
+    },[])
+
+    const handleClickSearchButtonWelcome = async ()=>{
+        console.log('handle click pressed')
+        
+
+        const options = {
+        method: 'GET',
+        url: 'https://jsearch.p.rapidapi.com/search',
+        params: {
+            query: 'Python developer in Texas, USA',
+            page: '1',
+            num_pages: '1'
+        },
+        headers: {
+            'X-RapidAPI-Key': '69cc20368dmsh8f68a3e8b817f03p119946jsnce2f011c2412',
+            'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
+        }
+        };
+
+        try {
+            const response = await axios.request(options);
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     const fallBackToDefaultAuth = () => {
         // TODO
@@ -83,12 +111,14 @@ const Home = () => {
         });
 
         // Log the user in on success
-        if (biometricAuth) { TwoButtonAlert() };
+        if (biometricAuth.success) { // TwoButtonAlert();
+            console.log("setting auth true............")
+            setIsBiometricAuthenticated(true); };
         console.log({ isBiometricAvailable });
         console.log({ supportedBiometrics });
         console.log({ savedBiometrics });
         console.log({ biometricAuth });
-        setIsBiometricAuthenticated(true);
+        
     }
 
     return (
@@ -119,22 +149,16 @@ const Home = () => {
                                 padding: SIZES.medium
                             }}
                         >
-                            <Button
-                                title='Login with Biometrics'
-                                color='black'
-                                onPress={handleBiometricAuthentication}
-                            />
                             <Welcome
-
+                                handleClick={handleClickSearchButtonWelcome}
                             />
                             <Popularjobs />
                             <Nearbyjobs />
                         </View>
                     </ScrollView></View> : <View>
                     <Text>
-                        {
-                            'Oops.... Sorry We can not further process... Your device is compatible with biometrics authentication'
-                        }
+                        {isBiometricSupported?'Please login with biometric authentication':'Oops.... Sorry We can not further process... Your device is compatible with biometrics authentication'}
+
                     </Text>
                     <Button
                         title='Try again... Login with Biometrics'
