@@ -1,12 +1,14 @@
-import { React,useState, useEffect } from "react";
-import { useRouter} from "expo-router";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import { useRouter } from "expo-router";
+import * as Location from 'expo-location';
 
 import styles from "./nearbyjobs.style";
 import { COLORS } from "../../../constants";
 import NearbyJobCard from "../../common/cards/nearby/NearbyJobCard";
 import useFetch from "../../../hook/useFetch";
-import * as Location from 'expo-location';
+import getCountry from "../../../hook/getCountry";
+
 const Nearbyjobs = () => {
   const router = useRouter();
   const { data, isLoading, error } = useFetch("search", {
@@ -18,8 +20,7 @@ const Nearbyjobs = () => {
   const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
-    (async () => {
-      
+    const getLocation = async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
@@ -30,11 +31,16 @@ const Nearbyjobs = () => {
       setLocation(location);
       console.log(location.coords.latitude);
       console.log(location.coords.longitude);
-  
-    })();
+    };
+
+    getLocation();
   }, []);
-  // findNearbyPlaceName
-  // http://api.geonames.org/findNearbyPlaceName?lat=47.3&lng=9&username=demo
+
+  const { datac, isLoadingc, errorc } = getCountry("findNearbyPlaceNameJSON", {
+    // Check if location is available before making the request
+    query: location ? { "lat": location.coords.latitude, "lon": location.coords.longitude, "username": "demo" } : null,
+    num_pages: "1",
+  });
 
   return (
     <View style={styles.container}>
