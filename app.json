@@ -5,7 +5,8 @@
       "bundler": "metro"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-local-authentication"
     ],
     "name": "practice-with-jsm",
     "slug": "practice-with-jsm"
