@@ -54,12 +54,13 @@ console.log(data)
               />
             )}
             keyExtractor={item=>item?.job_id}
-            // keyExtractor={(item) => item.job_id}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal
           />
         )}
       </View>
+
+
     </View>
   );
 };

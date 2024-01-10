@@ -7,6 +7,7 @@ import { Company, JobAbout, JobFooter, JobTabs, ScreenHeaderBtn, Specifics } fro
 import { COLORS, icons, SIZES } from '../../constants';
 import useFetch from '../../hook/useFetch';
 
+const tabs = ["About", "Qualification", "Responsibilities"];
 const JobDetails = () => {
     const params = useSearchParams();
     const router = useRouter();
@@ -15,10 +16,38 @@ const JobDetails = () => {
         job_id:params.id
     })
 
+
     const [refreshing, setRefreshing]=useState(false);
+    const [activeTab, setActiveTab] = useState(tabs[0]);
 
     const onRefresh=()=>{
 
+    }
+
+    const displayTabContent = ()=>{
+        console.log(data[0].job_highlights?.Qualifications[0])
+        switch(activeTab){
+            case "Qualifications":
+                return <Specifics
+                    title="Qualification"
+                    points= {data[0].job_highlights?.Qualifications ?? ['N/A']}
+
+                />
+            case "About":
+                return <JobAbout
+                info={data[0].job_description ?? "No data provider"} 
+                />
+
+            case "Responsibilities":
+                return <Specifics
+                    title="Responsibilities"
+                    points= {data[0].job_highlights?.Responsibilities ?? ['N/A']}
+
+                />
+            default:
+                break;
+
+        }
     }
   return (
     <SafeAreaView
@@ -74,11 +103,17 @@ const JobDetails = () => {
                         />
 
                         <JobTabs
+                        tabs = {tabs}
+                        activeTab={activeTab}
+                        setActiveTab={setActiveTab}
                         />
+                    {displayTabContent()}
                     </View>
                 ) }
 
             </ScrollView>
+
+            <JobFooter url={ data[0]?.job_google_link ?? 'https://careers.google.com/jobs/result'}/>
           </>
 
     </SafeAreaView>
