@@ -21,7 +21,6 @@ const Popularjobs = () => {
     query: "React developer",
     num_pages: "1",
   });
-console.log(data)
   const [selectedJob, setSelectedJob] = useState();
 
   const handleCardPress = (item) => {
@@ -54,12 +53,12 @@ console.log(data)
               />
             )}
             keyExtractor={item=>item?.job_id}
-            // keyExtractor={(item) => item.job_id}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal
           />
         )}
       </View>
+              
     </View>
   );
 };
