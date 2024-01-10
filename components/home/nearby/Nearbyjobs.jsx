@@ -28,11 +28,14 @@ const Nearbyjobs = () => {
 
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
+      console.log(location.coords.latitude);
+      console.log(location.coords.longitude);
+  
     })();
   }, []);
+  // findNearbyPlaceName
+  // http://api.geonames.org/findNearbyPlaceName?lat=47.3&lng=9&username=demo
 
-  console.log(location.coords.latitude)
-  console.log(location.coords.longitude)
   return (
     <View style={styles.container}>
       <View style={styles.header}>
