@@ -21,7 +21,6 @@ const Popularjobs = () => {
     query: "React developer",
     num_pages: "1",
   });
-console.log(data)
   const [selectedJob, setSelectedJob] = useState();
 
   const handleCardPress = (item) => {
@@ -59,8 +58,7 @@ console.log(data)
           />
         )}
       </View>
-
-
+              
     </View>
   );
 };

@@ -1,12 +1,12 @@
-import React from "react";
-import { useRouter } from "expo-router";
+import { React,useState, useEffect } from "react";
+import { useRouter} from "expo-router";
 import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 
 import styles from "./nearbyjobs.style";
 import { COLORS } from "../../../constants";
 import NearbyJobCard from "../../common/cards/nearby/NearbyJobCard";
 import useFetch from "../../../hook/useFetch";
-
+import * as Location from 'expo-location';
 const Nearbyjobs = () => {
   const router = useRouter();
   const { data, isLoading, error } = useFetch("search", {
@@ -14,6 +14,25 @@ const Nearbyjobs = () => {
     num_pages: "1",
   });
 
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
+  console.log(location.coords.latitude)
+  console.log(location.coords.longitude)
   return (
     <View style={styles.container}>
       <View style={styles.header}>
