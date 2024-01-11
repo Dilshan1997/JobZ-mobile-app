@@ -8,6 +8,7 @@ import axios from 'axios';
 
 const Home = () => {
     const router = useRouter();
+    const [searchTerm, setSearchTerm] = useState("")
 
     const [isBiometricSupported, setIsBiometricSupported] = useState(false);
     const [isBiometricAuthenticated, setIsBiometricAuthenticated] = useState(false);
@@ -26,8 +27,9 @@ const Home = () => {
 
     },[])
 
-    const handleClickSearchButtonWelcome = async ()=>{
-        console.log('handle click pressed')
+    const handleClickSearchButtonWelcome = async (keyword)=>{
+        console.log("test search......................................")
+        console.log('handle click pressed', keyword)
         
 
         const options = {
@@ -150,7 +152,13 @@ const Home = () => {
                             }}
                         >
                             <Welcome
-                                handleClick={handleClickSearchButtonWelcome}
+                                searchTerm={searchTerm}
+                                setSearchTerm={setSearchTerm}
+                                handleClick={()=>{
+                                    if(searchTerm){
+                                        router.push(`/serarch/${searchTerm}`)
+                                    }
+                                }}
                             />
                             <Popularjobs />
                             <Nearbyjobs />
