@@ -156,7 +156,7 @@ const Home = () => {
                                 setSearchTerm={setSearchTerm}
                                 handleClick={()=>{
                                     if(searchTerm){
-                                        router.push(`/serarch/${searchTerm}`)
+                                        router.push(`/search/${searchTerm}`)
                                     }
                                 }}
                             />

@@ -7,7 +7,7 @@ import { Company, JobAbout, JobFooter, JobTabs, ScreenHeaderBtn, Specifics } fro
 import { COLORS, icons, SIZES } from '../../constants';
 import useFetch from '../../hook/useFetch';
 
-const tabs = ["About", "Qualification", "Responsibilities"];
+const tabs = ["About", "Qualifications", "Responsibilities"];
 const JobDetails = () => {
     const params = useSearchParams();
     const router = useRouter();
@@ -23,9 +23,8 @@ const JobDetails = () => {
     const onRefresh=()=>{
 
     }
-
+    console.log(data[0].job_highlights.Qualifications)
     const displayTabContent = ()=>{
-        console.log(data[0].job_highlights?.Qualifications[0])
         switch(activeTab){
             case "Qualifications":
                 return <Specifics
