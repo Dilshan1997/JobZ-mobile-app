@@ -34,12 +34,12 @@ const Home = () => {
         method: 'GET',
         url: 'https://jsearch.p.rapidapi.com/search',
         params: {
-            query: 'Python developer in Texas, USA',
+            query: '',
             page: '1',
             num_pages: '1'
         },
         headers: {
-            'X-RapidAPI-Key': '69cc20368dmsh8f68a3e8b817f03p119946jsnce2f011c2412',
+            'X-RapidAPI-Key': '5eb5f312a5msh1228171d2954756p190ad6jsnaa1d2c8331f1',
             'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
         }
         };
